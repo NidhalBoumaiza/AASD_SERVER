@@ -136,7 +136,6 @@ userSchema.virtual("ratingAverage").get(function () {
   }
   return 0;
 });
-
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 

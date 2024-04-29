@@ -11,6 +11,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const http = require("http");
 const socketIo = require("socket.io");
+const path = require("path");
+
 //------------ROUTES----------------
 const userRouter = require("./routes/userRouter");
 const serviceRouter = require("./routes/serviceRouter");
@@ -61,6 +63,7 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
+app.use("/images", express.static(path.join(__dirname, "./images")));
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/services", serviceRouter);
