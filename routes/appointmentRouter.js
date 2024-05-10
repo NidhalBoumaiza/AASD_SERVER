@@ -4,7 +4,7 @@ const appointmentController = require("../controllers/appointmentController");
 const authController = require("../controllers/authController");
 router
   .route("/getAvailablePersonnelSanteInMyzone")
-  .get(
+  .post(
     authController.protect,
     appointmentController.getAvailablePersonnelSanteInMyzone,
   );
