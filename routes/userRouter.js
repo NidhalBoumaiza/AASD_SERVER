@@ -30,4 +30,8 @@ router
   .route("/disableMyAccount")
   .patch(authController.protect, userController.disableMyAccount);
 
+router
+  .route("/updateMyProfile")
+  .patch(authController.protect, userController.updateMyProfile);
+
 module.exports = router;

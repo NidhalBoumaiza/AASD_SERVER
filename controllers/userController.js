@@ -12,6 +12,28 @@ const filtredObj = (obj, ...allowedFields) => {
 };
 
 //----------------------------disable my account ----------------------------------
+exports.updateMyProfile = catchAsync(async (req, res, next) => {
+  const filteredBody = filtredObj(
+    req.body,
+    "firstName",
+    "lastName",
+    "email",
+    "numTel",
+    "dob",
+  );
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      user: updatedUser,
+    },
+  });
+});
+
 exports.disableMyAccount = catchAsync(async (req, res, next) => {
   req.user.accountStatus = false;
   await req.user.save({ validateBeforeSave: false });
