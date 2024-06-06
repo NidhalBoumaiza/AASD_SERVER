@@ -6,6 +6,7 @@ const Appointment = require("./appointmentModel");
 
 const userSchema = mongoose.Schema(
   {
+    situation: String,
     profilePicture: {
       type: String,
       default: `default${Math.floor(Math.random() * 4) + 1}.jpg`,

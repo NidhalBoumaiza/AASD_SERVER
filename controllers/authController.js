@@ -89,6 +89,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
     dob: req.body.dob,
     gender: req.body.gender,
     role: req.body.role,
+    situation: req.body.situation,
   });
 
   const activeToken = newAccount.createActiveUserToken();

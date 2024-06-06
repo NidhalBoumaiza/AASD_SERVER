@@ -20,6 +20,7 @@ exports.updateMyProfile = catchAsync(async (req, res, next) => {
     "email",
     "numTel",
     "dob",
+    "situation",
   );
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,
