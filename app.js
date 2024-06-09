@@ -15,6 +15,7 @@ const app = express();
 //------------ROUTES----------------
 const userRouter = require("./routes/userRouter");
 const appointmentRouter = require("./routes/appointmentRouter");
+const conversationRouter = require("./routes/conversationRouter");
 //------------------------------
 
 app.use(cors());
@@ -45,6 +46,7 @@ app.use((req, res, next) => {
 // 3) ROUTES
 app.use("/images", express.static(path.join(__dirname, "./images")));
 
+app.use("/api/v1/conversations", conversationRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/appointments", appointmentRouter);
 app.all("*", (req, res, next) => {

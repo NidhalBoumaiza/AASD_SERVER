@@ -54,7 +54,6 @@ io.on("connection", (socket) => {
 
     if (socketId) {
       io.to(socketId).emit("message", message);
-
       // Save message to the database using the controller function
       await conversationController.storeMessage(senderId, userId, message);
     }

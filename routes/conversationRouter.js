@@ -9,6 +9,12 @@ router.post(
   conversationController.storeMessage,
 );
 
+router.post(
+  "/initiate",
+  authController.protect,
+  conversationController.initiateConverstation,
+);
+
 router.get(
   "/myConversations",
   authController.protect,
