@@ -54,7 +54,6 @@ createSendToken = (user, statuscode, res) => {
 
 exports.signUp = catchAsync(async (req, res, next) => {
   let newAccount = null;
-  console.log(req.body);
   if (
     !req.body.email ||
     !req.body.password ||

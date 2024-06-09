@@ -38,7 +38,7 @@ exports.updateMyProfile = catchAsync(async (req, res, next) => {
 exports.disableMyAccount = catchAsync(async (req, res, next) => {
   req.user.accountStatus = false;
   await req.user.save({ validateBeforeSave: false });
-  console.log(req.user);
+
   res.status(201).json({
     status: "Success",
     message: "votre compte est maintenant désactiver",
@@ -52,7 +52,7 @@ exports.updateMyLocation = catchAsync(async (req, res, next) => {
   };
   await req.user.save({ validateBeforeSave: false });
 
-  console.log(req.user);
+
   res.status(201).json({
     status: "Success",
   });
@@ -61,7 +61,7 @@ exports.updateMyLocation = catchAsync(async (req, res, next) => {
 exports.updateMyWorkingTime = catchAsync(async (req, res, next) => {
   req.user.workingTime = req.body.workingTime;
   await req.user.save({ validateBeforeSave: false });
-  console.log(req.user);
+
   res.status(201).json({
     status: "Success",
   });

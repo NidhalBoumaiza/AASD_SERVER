@@ -18,7 +18,7 @@ const appointmentRouter = require("./routes/appointmentRouter");
 const conversationRouter = require("./routes/conversationRouter");
 //------------------------------
 
-app.use(cors());
+app.use(cors("*"));
 app.use(xss());
 app.use(mongoSanitize());
 app.use(helmet());

@@ -1,6 +1,8 @@
 const app = require("./app");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const socketIo = require("socket.io");
+const conversationController = require('./controllers/conversationController')
 
 process.on("uncaughtException", (err) => {
   console.log("UNCAUGHT EXCEPTION! 💥 Shutting down...");
@@ -34,9 +36,14 @@ process.on("unhandledRejection", (err) => {
 });
 
 // Initialize Socket.IO
-const socketIo = require("socket.io");
-const io = socketIo(server);
-const users = {};
+const io = socketIo(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"]
+  }
+});
+let users = {};
+
 
 // START SOCKET IO
 io.on("connection", (socket) => {
@@ -52,11 +59,15 @@ io.on("connection", (socket) => {
     const senderId = socket.handshake.query.userId; // Assuming you pass the userId as a query parameter when connecting
     const socketId = users[userId];
 
+
+    console.log(message);
+
     if (socketId) {
       io.to(socketId).emit("message", message);
-      // Save message to the database using the controller function
-      await conversationController.storeMessage(senderId, userId, message);
     }
+    // Save message to the database using the controller function
+    await conversationController.storeMessage(senderId, userId, message);
+
   });
 
   // Handle user disconnect

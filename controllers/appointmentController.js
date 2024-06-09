@@ -32,7 +32,6 @@ exports.getAvailablePersonnelSanteInMyzone = catchAsync(
       endDate: { $gte: startDate },
     });
 
-    console.log(overlappingAppointments);
 
     // Get the IDs of these appointments
     const overlappingAppointmentIds = overlappingAppointments.map(
