@@ -17,22 +17,23 @@ const userRouter = require("./routes/userRouter");
 const appointmentRouter = require("./routes/appointmentRouter");
 const conversationRouter = require("./routes/conversationRouter");
 //------------------------------
+app.use("/images", express.static(path.join(__dirname, "./images")));
 
-app.use(cors("*"));
-app.use(xss());
-app.use(mongoSanitize());
-app.use(helmet());
+app.use(cors({ origin: "*" }));
+// app.use(xss());
+// app.use(mongoSanitize());
+// app.use(helmet());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // 1) MIDDLEWARES
-const limiter = rateLimit({
-  max: 100,
-  windowMs: 60 * 60 * 1000,
-  message: "Too many requests from this IP , please try again in an hour !",
-});
-app.use("/api", limiter);
+// const limiter = rateLimit({
+//   max: 100,
+//   windowMs: 60 * 60 * 1000,
+//   message: "Too many requests from this IP , please try again in an hour !",
+// });
+// app.use("/api", limiter);
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -44,7 +45,6 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
-app.use("/images", express.static(path.join(__dirname, "./images")));
 
 app.use("/api/v1/conversations", conversationRouter);
 app.use("/api/v1/users", userRouter);
